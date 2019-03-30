@@ -1,1 +1,15 @@
 
+
+# Convolutional Sentiment Analysis
+
+In the previous notebooks, we managed to achieve a test accuracy of ~85% using RNNs and an implementation of the Bag of Tricks for Efficient Text Classification model. In this notebook, we will be using a convolutional neural network (CNN) to conduct sentiment analysis, implementing the model from Convolutional Neural Networks for Sentence Classification.
+
+Note: I am not aiming to give a comprehensive introduction and explanation of CNNs. For a better and more in-depth explanation check out here and here.
+
+Traditionally, CNNs are used to analyse images and are made up of one or more convolutional layers, followed by one or more linear layers. The convolutional layers use filters (also called kernels or receptive fields) which scan across an image and produce a processed version of the image. This processed version of the image can be fed into another convolutional layer or a linear layer. Each filter has a shape, e.g. a 3x3 filter covers a 3 pixel wide and 3 pixel high area of the image, and each element of the filter has a weight associated with it, the 3x3 filter would have 9 weights. In traditional image processing these weights were specified by hand by engineers, however the main advantage of the convolutional layers in neural networks is that these weights are learned via backpropagation.
+
+The intuitive idea behind learning the weights is that your convolutional layers act like feature extractors, extracting parts of the image that are most important for your CNN's goal, e.g. if using a CNN to detect faces in an image, the CNN may be looking for features such as the existance of a nose, mouth or a pair of eyes in the image.
+
+So why use CNNs on text? In the same way that a 3x3 filter can look over a patch of an image, a 1x2 filter can look over a 2 sequential words in a piece of text, i.e. a bi-gram. In the previous tutorial we looked at the FastText model which used bi-grams by explicitly adding them to the end of a text, in this CNN model we will instead use multiple filters of different sizes which will look at the bi-grams (a 1x2 filter), tri-grams (a 1x3 filter) and/or n-grams (a 1x$n$ filter) within the text.
+
+The intuition here is that the appearance of certain bi-grams, tri-grams and n-grams within the review will be a good indication of the final sentiment.
